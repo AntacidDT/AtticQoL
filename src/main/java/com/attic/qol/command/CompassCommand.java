@@ -29,7 +29,7 @@ public class CompassCommand {
         String arrow = getArrow(yaw);
 
         source.sendFeedback(() -> Text.literal("Facing: ").formatted(Formatting.GRAY)
-            .append(Text.literal(direction + " " + arrow).formatted(Formatting.AQUA)), false);
+            .append(Text.literal(direction + " " + arrow + " (" + String.format("%.1f", yaw) + "°)").formatted(Formatting.AQUA)), false);
 
         return 1;
     }

@@ -26,6 +26,7 @@ public class AtticQolCommand {
         source.sendFeedback(() -> cmd("/wheredeath -l [1-16]", "Show specific previous death"), false);
         source.sendFeedback(() -> cmd("/wheredeath -l all", "Show all 16 deaths (coords only)"), false);
         source.sendFeedback(() -> cmd("/location", "Show current coords, biome, dimension"), false);
+        source.sendFeedback(() -> cmd("/coords", "Quick X Y Z coordinates"), false);
         source.sendFeedback(() -> cmd("/home", "Show world spawn point"), false);
         source.sendFeedback(() -> cmd("/depth", "Show depth relative to sea level"), false);
         source.sendFeedback(() -> Text.literal(""), false);
@@ -37,15 +38,21 @@ public class AtticQolCommand {
         source.sendFeedback(() -> Text.literal(""), false);
 
         source.sendFeedback(() -> Text.literal("--- World Info ---").formatted(Formatting.YELLOW), false);
-        source.sendFeedback(() -> cmd("/lightlevel", "Show light level at your position"), false);
-        source.sendFeedback(() -> cmd("/chunkinfo", "Show chunk coordinates and region"), false);
+        source.sendFeedback(() -> cmd("/lightlevel", "Show light level and mob spawn status"), false);
+        source.sendFeedback(() -> cmd("/chunkinfo", "Show chunk coordinates and region file"), false);
+        source.sendFeedback(() -> cmd("/biome", "Show biome name, temperature, precipitation"), false);
         source.sendFeedback(() -> cmd("/weather", "Show current weather info"), false);
-        source.sendFeedback(() -> cmd("/day", "Show current in-game day"), false);
+        source.sendFeedback(() -> cmd("/day", "Show current in-game day and time"), false);
+        source.sendFeedback(() -> cmd("/nearby", "Count of passive/hostile mobs nearby"), false);
+        source.sendFeedback(() -> cmd("/entitycount", "Entity breakdown by type"), false);
         source.sendFeedback(() -> Text.literal(""), false);
 
         source.sendFeedback(() -> Text.literal("--- Player Stats ---").formatted(Formatting.YELLOW), false);
+        source.sendFeedback(() -> cmd("/stats", "Health, hunger, armor, XP, coords summary"), false);
+        source.sendFeedback(() -> cmd("/exp", "Show XP level and progress"), false);
+        source.sendFeedback(() -> cmd("/armor", "Show armor durability"), false);
         source.sendFeedback(() -> cmd("/wstats", "Show network stats (ping, connection)"), false);
-        source.sendFeedback(() -> cmd("/compass", "Show facing direction"), false);
+        source.sendFeedback(() -> cmd("/compass", "Show facing direction with yaw"), false);
         source.sendFeedback(() -> cmd("/timeplayed", "Show session play time"), false);
         source.sendFeedback(() -> Text.literal(""), false);
 

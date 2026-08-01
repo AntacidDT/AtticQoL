@@ -27,6 +27,13 @@ public class AtticQoL implements ModInitializer {
             DayCommand.register(dispatcher);
             HomeCommand.register(dispatcher);
             DepthCommand.register(dispatcher);
+            ExpCommand.register(dispatcher);
+            ArmorCommand.register(dispatcher);
+            CoordsCommand.register(dispatcher);
+            BiomeCommand.register(dispatcher);
+            NearbyCommand.register(dispatcher);
+            EntityCountCommand.register(dispatcher);
+            StatsCommand.register(dispatcher);
             AtticQolCommand.register(dispatcher);
         });
 
