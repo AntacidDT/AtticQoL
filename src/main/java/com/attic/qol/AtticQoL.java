@@ -21,6 +21,13 @@ public class AtticQoL implements ModInitializer {
             WStatsCommand.register(dispatcher);
             CompassCommand.register(dispatcher);
             TimePlayedCommand.register(dispatcher);
+            LightLevelCommand.register(dispatcher);
+            ChunkInfoCommand.register(dispatcher);
+            WeatherCommand.register(dispatcher);
+            DayCommand.register(dispatcher);
+            HomeCommand.register(dispatcher);
+            DepthCommand.register(dispatcher);
+            AtticQolCommand.register(dispatcher);
         });
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
