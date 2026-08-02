@@ -92,4 +92,4 @@ Output: `build/libs/atticqol-1.0.0.jar`
 
 ## License
 
-MIT
+Apache 2.0
