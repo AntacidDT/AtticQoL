@@ -27,7 +27,7 @@ public class LocationCommand {
         }
 
         BlockPos pos = player.getBlockPos();
-        String dimensionKey = player.getWorld().getRegistryKey().getValue().toString();
+        String dimensionKey = player.world.getRegistryKey().getValue().toString();
         String dimensionName = switch (dimensionKey) {
             case "minecraft:overworld" -> "Overworld";
             case "minecraft:the_nether" -> "The Nether";
@@ -35,7 +35,7 @@ public class LocationCommand {
             default -> dimensionKey;
         };
 
-        RegistryEntry<Biome> biomeEntry = player.getWorld().getBiome(pos);
+        RegistryEntry<Biome> biomeEntry = player.world.getBiome(pos);
         String biomeName = biomeEntry.getKey()
             .map(key -> key.getValue().toString())
             .orElse("Unknown");

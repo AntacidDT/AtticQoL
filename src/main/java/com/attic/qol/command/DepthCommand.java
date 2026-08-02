@@ -27,7 +27,7 @@ public class DepthCommand {
 
         BlockPos pos = player.getBlockPos();
         int seaLevel = 63;
-        int surfaceY = player.getWorld().getTopY(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
+        int surfaceY = player.world.getTopY(Heightmap.Type.WORLD_SURFACE, pos.getX(), pos.getZ());
         int depth = seaLevel - pos.getY();
         int fromSurface = surfaceY - pos.getY();
 

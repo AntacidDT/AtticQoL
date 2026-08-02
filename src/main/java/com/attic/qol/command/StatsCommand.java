@@ -1,8 +1,6 @@
 package com.attic.qol.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -33,7 +31,7 @@ public class StatsCommand {
         int armor = player.getArmor();
         int level = player.experienceLevel;
 
-        String dimension = player.getWorld().getRegistryKey().getValue().toString();
+        String dimension = player.world.getRegistryKey().getValue().toString();
         String dimensionName = switch (dimension) {
             case "minecraft:overworld" -> "Overworld";
             case "minecraft:the_nether" -> "Nether";

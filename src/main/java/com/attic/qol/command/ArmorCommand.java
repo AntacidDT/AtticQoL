@@ -1,7 +1,7 @@
 package com.attic.qol.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -28,11 +28,11 @@ public class ArmorCommand {
         source.sendFeedback(() -> Text.literal("=== Armor Durability ===").formatted(Formatting.GOLD), false);
 
         String[] slotNames = {"Helmet", "Chestplate", "Leggings", "Boots"};
-        int[] slots = {3, 2, 1, 0};
+        EquipmentSlot[] slots = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
 
         boolean hasArmor = false;
         for (int i = 0; i < 4; i++) {
-            ItemStack stack = player.getInventory().getArmorStack(slots[i]);
+            ItemStack stack = player.getEquippedStack(slots[i]);
             if (!stack.isEmpty()) {
                 hasArmor = true;
                 int maxDurability = stack.getMaxDamage();

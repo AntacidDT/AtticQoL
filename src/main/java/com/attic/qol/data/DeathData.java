@@ -2,7 +2,6 @@ package com.attic.qol.data;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class DeathData {
     private final int x, y, z;
@@ -64,13 +63,13 @@ public class DeathData {
 
     public static DeathData fromNbt(NbtCompound nbt) {
         return new DeathData(
-            nbt.getInt("x"),
-            nbt.getInt("y"),
-            nbt.getInt("z"),
-            nbt.getString("dimension"),
-            nbt.getString("biome"),
-            nbt.getLong("worldTime"),
-            nbt.getString("cause")
+            nbt.getInt("x", 0),
+            nbt.getInt("y", 0),
+            nbt.getInt("z", 0),
+            nbt.getString("dimension", ""),
+            nbt.getString("biome", ""),
+            nbt.getLong("worldTime", 0L),
+            nbt.getString("cause", "")
         );
     }
 }

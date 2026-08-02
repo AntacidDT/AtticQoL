@@ -23,7 +23,7 @@ public class DayCommand {
             return 0;
         }
 
-        long time = player.getWorld().getTime();
+        long time = player.world.getTime();
         long day = time / 24000;
         long timeOfDay = time % 24000;
 

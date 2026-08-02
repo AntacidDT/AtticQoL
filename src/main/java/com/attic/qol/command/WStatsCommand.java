@@ -3,6 +3,7 @@ package com.attic.qol.command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -27,7 +28,8 @@ public class WStatsCommand {
         }
 
         int ping = player.networkHandler.getLatency();
-        boolean isSingleplayer = player.server.isSingleplayer();
+        ServerWorld serverWorld = (ServerWorld) player.world;
+        boolean isSingleplayer = serverWorld.getServer().isSingleplayer();
 
         String connectionType = isSingleplayer ? "Singleplayer" : "Multiplayer";
 
@@ -35,15 +37,15 @@ public class WStatsCommand {
         if (isSingleplayer) {
             serverAddress = "Local";
         } else {
-            String ip = player.server.getServerIp();
+            String ip = serverWorld.getServer().getServerIp();
             if (ip == null || ip.isEmpty()) {
                 ip = "Unknown";
             }
-            int port = player.server.getServerPort();
+            int port = serverWorld.getServer().getServerPort();
             serverAddress = port != 25565 ? ip + ":" + port : ip;
         }
 
-        String dimension = player.getWorld().getRegistryKey().getValue().toString();
+        String dimension = player.world.getRegistryKey().getValue().toString();
         String dimensionName = switch (dimension) {
             case "minecraft:overworld" -> "Overworld";
             case "minecraft:the_nether" -> "The Nether";
@@ -51,7 +53,7 @@ public class WStatsCommand {
             default -> dimension;
         };
 
-        String gameMode = player.interactionManager.getGameMode().getName();
+        String gameMode = player.interactionManager.getGameMode().getId();
 
         Formatting pingColor;
         String quality;

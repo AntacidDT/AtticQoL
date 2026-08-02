@@ -8,7 +8,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -28,7 +27,7 @@ public class BiomeCommand {
         }
 
         BlockPos pos = player.getBlockPos();
-        RegistryEntry<Biome> biomeEntry = player.getWorld().getBiome(pos);
+        RegistryEntry<Biome> biomeEntry = player.world.getBiome(pos);
         Biome biome = biomeEntry.value();
 
         String biomeName = biomeEntry.getKey()

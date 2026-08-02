@@ -6,7 +6,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +19,7 @@ public abstract class DeathTrackerMixin {
     @Inject(method = "onDeath", at = @At("HEAD"))
     private void onDeath(DamageSource damageSource, CallbackInfo ci) {
         ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
-        ServerWorld world = player.getServerWorld();
+        ServerWorld world = (ServerWorld) player.world;
         BlockPos pos = player.getBlockPos();
 
         RegistryEntry<Biome> biomeEntry = world.getBiome(pos);

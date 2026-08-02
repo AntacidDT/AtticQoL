@@ -24,19 +24,21 @@ public class HomeCommand {
             return 0;
         }
 
-        BlockPos spawnPos = player.getSpawnPointPosition();
-        String dimension = player.getSpawnPointDimension().getValue().toString();
+        ServerPlayerEntity.Respawn respawn = player.getRespawn();
+
+        if (respawn == null || respawn.respawnData() == null) {
+            source.sendFeedback(() -> Text.literal("No spawn point set.").formatted(Formatting.YELLOW), false);
+            return 1;
+        }
+
+        BlockPos spawnPos = respawn.respawnData().getPos();
+        String dimension = respawn.respawnData().getDimension().getValue().toString();
         String dimensionName = switch (dimension) {
             case "minecraft:overworld" -> "Overworld";
             case "minecraft:the_nether" -> "The Nether";
             case "minecraft:the_end" -> "The End";
             default -> dimension;
         };
-
-        if (spawnPos == null) {
-            source.sendFeedback(() -> Text.literal("No spawn point set.").formatted(Formatting.YELLOW), false);
-            return 1;
-        }
 
         source.sendFeedback(() -> Text.literal("=== Spawn Point ===").formatted(Formatting.GOLD), false);
         source.sendFeedback(() -> Text.literal("Location: ").formatted(Formatting.GRAY)

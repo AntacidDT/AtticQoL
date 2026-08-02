@@ -4,6 +4,7 @@ import com.attic.qol.data.PlayerDataStorage;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -24,17 +25,18 @@ public class TimePlayedCommand {
             return 0;
         }
 
-        PlayerDataStorage storage = PlayerDataStorage.getServerState(source.getServer());
+        ServerWorld serverWorld = (ServerWorld) player.world;
+        PlayerDataStorage storage = PlayerDataStorage.getServerState(serverWorld.getServer());
         long joinTime = storage.getJoinTime(player.getUuid());
 
         if (joinTime == 0) {
-            storage.setJoinTime(player.getUuid(), player.getServerWorld().getTime());
+            storage.setJoinTime(player.getUuid(), serverWorld.getTime());
             source.sendFeedback(() -> Text.literal("Session started. Play time will be tracked.")
                 .formatted(Formatting.YELLOW), false);
             return 1;
         }
 
-        long currentTime = player.getServerWorld().getTime();
+        long currentTime = serverWorld.getTime();
         long ticksPlayed = currentTime - joinTime;
 
         long totalSeconds = ticksPlayed / 20;

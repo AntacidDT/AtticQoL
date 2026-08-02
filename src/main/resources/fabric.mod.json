@@ -6,16 +6,17 @@
     "description": "Quality of life commands for Minecraft",
     "authors": ["Attic"],
     "contact": {},
-    "license": "MIT",
+    "license": "Apache-2.0",
     "icon": "assets/atticqol/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": ["com.attic.qol.AtticQoL"]
     },
     "mixins": ["atticqol.mixins.json"],
+    "accessWidener": "atticqol.accesswidener",
     "depends": {
         "fabricloader": ">=0.16.0",
-        "minecraft": "~1.21.1",
+        "minecraft": "~1.21.11",
         "java": ">=21",
         "fabric-api": "*"
     }

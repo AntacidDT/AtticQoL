@@ -7,9 +7,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypeFilter;
+import net.minecraft.util.math.Vec3d;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -28,15 +30,18 @@ public class NearbyCommand {
             return 0;
         }
 
+        ServerWorld serverWorld = (ServerWorld) player.world;
+        Vec3d playerPos = player.pos;
+
         int passiveCount = 0;
         int hostileCount = 0;
         int itemsCount = 0;
         int otherCount = 0;
 
-        for (Entity entity : player.getServerWorld().getEntitiesByType(TypeFilter.instanceOf(Entity.class), e -> true)) {
+        for (Entity entity : serverWorld.getEntitiesByType(TypeFilter.instanceOf(Entity.class), e -> true)) {
             if (entity.getUuid().equals(player.getUuid())) continue;
 
-            double distance = entity.getPos().distanceTo(player.getPos());
+            double distance = entity.pos.distanceTo(playerPos);
             if (distance > 128) continue;
 
             if (entity instanceof Monster) {

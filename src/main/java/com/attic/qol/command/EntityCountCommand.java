@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypeFilter;
@@ -28,10 +29,11 @@ public class EntityCountCommand {
             return 0;
         }
 
+        ServerWorld serverWorld = (ServerWorld) player.world;
         Map<String, Integer> counts = new HashMap<>();
         int total = 0;
 
-        for (Entity entity : player.getServerWorld().getEntitiesByType(TypeFilter.instanceOf(Entity.class), e -> true)) {
+        for (Entity entity : serverWorld.getEntitiesByType(TypeFilter.instanceOf(Entity.class), e -> true)) {
             if (entity.getUuid().equals(player.getUuid())) continue;
 
             String name = entity.getType().getName().getString();

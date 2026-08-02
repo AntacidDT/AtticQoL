@@ -40,7 +40,7 @@ public class MarkerCommand {
         }
 
         BlockPos pos = player.getBlockPos();
-        String dimensionKey = player.getWorld().getRegistryKey().getValue().toString();
+        String dimensionKey = player.world.getRegistryKey().getValue().toString();
 
         MarkerData marker = new MarkerData(name, pos.getX(), pos.getY(), pos.getZ(), dimensionKey);
 

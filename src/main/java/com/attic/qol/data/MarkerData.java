@@ -42,11 +42,11 @@ public class MarkerData {
 
     public static MarkerData fromNbt(NbtCompound nbt) {
         return new MarkerData(
-            nbt.getString("name"),
-            nbt.getInt("x"),
-            nbt.getInt("y"),
-            nbt.getInt("z"),
-            nbt.getString("dimension")
+            nbt.getString("name", ""),
+            nbt.getInt("x", 0),
+            nbt.getInt("y", 0),
+            nbt.getInt("z", 0),
+            nbt.getString("dimension", "")
         );
     }
 }

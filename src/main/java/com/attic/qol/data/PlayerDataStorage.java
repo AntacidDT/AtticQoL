@@ -1,11 +1,15 @@
 package com.attic.qol.data;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
+import net.minecraft.world.PersistentStateType;
 
 import java.util.*;
 
@@ -20,56 +24,43 @@ public class PlayerDataStorage extends PersistentState {
         super();
     }
 
-    public static PlayerDataStorage getServerState(MinecraftServer server) {
-        PersistentStateManager manager = server.getOverworld().getPersistentStateManager();
-        PlayerDataStorage state = manager.getOrCreate(
-            new PersistentState.Type<>(
-                PlayerDataStorage::new,
-                PlayerDataStorage::fromNbt,
-                null
-            ),
-            DATA_NAME
-        );
-        state.markDirty();
-        return state;
-    }
-
-    public static PlayerDataStorage fromNbt(NbtCompound nbt, net.minecraft.registry.RegistryWrapper.WrapperLookup registryLookup) {
+    private static PlayerDataStorage fromNbt(NbtCompound nbt) {
         PlayerDataStorage state = new PlayerDataStorage();
 
-        NbtCompound deathsCompound = nbt.getCompound("deaths");
+        NbtCompound deathsCompound = nbt.getCompoundOrEmpty("deaths");
         for (String key : deathsCompound.getKeys()) {
             UUID uuid = UUID.fromString(key);
-            NbtList list = deathsCompound.getList(key, NbtElement.COMPOUND_TYPE);
+            NbtList list = deathsCompound.getListOrEmpty(key);
             List<DeathData> deaths = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
-                deaths.add(DeathData.fromNbt(list.getCompound(i)));
+                deaths.add(DeathData.fromNbt(list.getCompoundOrEmpty(i)));
             }
             state.deathHistory.put(uuid, deaths);
         }
 
-        NbtCompound markersCompound = nbt.getCompound("markers");
+        NbtCompound markersCompound = nbt.getCompoundOrEmpty("markers");
         for (String key : markersCompound.getKeys()) {
             UUID uuid = UUID.fromString(key);
-            NbtList list = markersCompound.getList(key, NbtElement.COMPOUND_TYPE);
+            NbtList list = markersCompound.getListOrEmpty(key);
             List<MarkerData> markerList = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
-                markerList.add(MarkerData.fromNbt(list.getCompound(i)));
+                markerList.add(MarkerData.fromNbt(list.getCompoundOrEmpty(i)));
             }
             state.markers.put(uuid, markerList);
         }
 
-        NbtCompound joinTimesCompound = nbt.getCompound("joinTimes");
+        NbtCompound joinTimesCompound = nbt.getCompoundOrEmpty("joinTimes");
         for (String key : joinTimesCompound.getKeys()) {
             UUID uuid = UUID.fromString(key);
-            state.joinTimes.put(uuid, joinTimesCompound.getLong(key));
+            state.joinTimes.put(uuid, joinTimesCompound.getLong(key, 0L));
         }
 
         return state;
     }
 
-    @Override
-    public NbtCompound writeNbt(NbtCompound nbt, net.minecraft.registry.RegistryWrapper.WrapperLookup registryLookup) {
+    private NbtCompound toNbt() {
+        NbtCompound nbt = new NbtCompound();
+
         NbtCompound deathsCompound = new NbtCompound();
         for (Map.Entry<UUID, List<DeathData>> entry : deathHistory.entrySet()) {
             NbtList list = new NbtList();
@@ -97,6 +88,31 @@ public class PlayerDataStorage extends PersistentState {
         nbt.put("joinTimes", joinTimesCompound);
 
         return nbt;
+    }
+
+    private static final Codec<PlayerDataStorage> CODEC = RecordCodecBuilder.create(instance ->
+        instance.group(
+            Codec.STRING.optionalFieldOf("data", "").forGetter(x -> "")
+        ).apply(instance, ignored -> new PlayerDataStorage())
+    );
+
+    private static final PersistentStateType<PlayerDataStorage> TYPE = new PersistentStateType<>(
+        DATA_NAME,
+        PlayerDataStorage::new,
+        CODEC,
+        null
+    );
+
+    public static PlayerDataStorage getServerState(MinecraftServer server) {
+        PersistentStateManager manager = server.getOverworld().getPersistentStateManager();
+        PlayerDataStorage state = manager.getOrCreate(TYPE);
+        state.markDirty();
+        return state;
+    }
+
+    @Override
+    public void setDirty(boolean dirty) {
+        super.setDirty(dirty);
     }
 
     public void addDeath(UUID playerUuid, DeathData death) {

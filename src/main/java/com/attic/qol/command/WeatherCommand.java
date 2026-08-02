@@ -5,6 +5,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.World;
 
 import static net.minecraft.server.command.CommandManager.literal;
@@ -24,7 +27,7 @@ public class WeatherCommand {
             return 0;
         }
 
-        World world = player.getWorld();
+        World world = player.world;
         boolean isRaining = world.isRaining();
         boolean isThundering = world.isThundering();
 

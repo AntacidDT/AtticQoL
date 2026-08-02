@@ -26,8 +26,8 @@ public class LightLevelCommand {
         }
 
         BlockPos pos = player.getBlockPos();
-        int blockLight = player.getWorld().getLightLevel(LightType.BLOCK, pos);
-        int skyLight = player.getWorld().getLightLevel(LightType.SKY, pos);
+        int blockLight = player.world.getLightLevel(LightType.BLOCK, pos);
+        int skyLight = player.world.getLightLevel(LightType.SKY, pos);
         int totalLight = Math.max(blockLight, skyLight);
 
         Formatting color;
