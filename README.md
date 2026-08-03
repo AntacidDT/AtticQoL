@@ -1,6 +1,15 @@
-# AtticQoL
+<p align="center">
+  <img src="docs/images/logo.jpg" alt="Attic QoL Logo" width="200">
+</p>
 
-A Quality of Life mod for Minecraft 1.21.1 (Fabric) that bundles essential QoL commands into one lightweight package. No cheats, server-safe, zero bloat.
+<h1 align="center">Attic QoL</h1>
+
+<p align="center">
+  A Quality of Life mod for Minecraft 1.21.11 (Fabric)<br>
+  20 commands. No cheats. Server-safe. Zero bloat.
+</p>
+
+---
 
 ## Installation
 
@@ -10,6 +19,18 @@ A Quality of Life mod for Minecraft 1.21.1 (Fabric) that bundles essential QoL c
 4. Launch Minecraft with the Fabric profile
 
 **Dependencies:** [Fabric API](https://modrinth.com/mod/fabric-api)
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/atticqolcommandpreview1.jpg" alt="Command Preview 1" width="600"><br>
+  <img src="docs/images/atticqolcommandpreview2.jpg" alt="Command Preview 2" width="600"><br>
+  <img src="docs/images/statsandwstatsatticqol.jpg" alt="Stats and WStats" width="600"><br>
+  <img src="docs/images/wheredeathpreview.jpg" alt="Where Death Preview" width="600"><br>
+  <img src="docs/images/markeraddpreviewatticqol.jpg" alt="Marker Add" width="600"><br>
+  <img src="docs/images/markerlistpreviewatticqol.jpg" alt="Marker List" width="600"><br>
+  <img src="docs/images/markerbasepreviewatticqol.jpg" alt="Marker Base" width="600">
+</p>
 
 ## Commands
 
