@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/logo.jpg" alt="Attic QoL Logo" width="200">
+  <img src="docs/images/logo.jpg" alt="Attic QoL Logo" width="100">
 </p>
 
 <h1 align="center">Attic QoL</h1>
@@ -23,13 +23,13 @@
 ## Screenshots
 
 <p align="center">
-  <img src="docs/images/atticqolcommandpreview1.jpg" alt="Command Preview 1" width="600"><br>
-  <img src="docs/images/atticqolcommandpreview2.jpg" alt="Command Preview 2" width="600"><br>
-  <img src="docs/images/statsandwstatsatticqol.jpg" alt="Stats and WStats" width="600"><br>
-  <img src="docs/images/wheredeathpreview.jpg" alt="Where Death Preview" width="600"><br>
-  <img src="docs/images/markeraddpreviewatticqol.jpg" alt="Marker Add" width="600"><br>
-  <img src="docs/images/markerlistpreviewatticqol.jpg" alt="Marker List" width="600"><br>
-  <img src="docs/images/markerbasepreviewatticqol.jpg" alt="Marker Base" width="600">
+  <img src="docs/images/atticqolcommandpreview1.jpg" alt="Command Preview 1" width="250">
+  <img src="docs/images/atticqolcommandpreview2.jpg" alt="Command Preview 2" width="250">
+  <img src="docs/images/statsandwstatsatticqol.jpg" alt="Stats and WStats" width="250">
+  <img src="docs/images/wheredeathpreview.jpg" alt="Where Death Preview" width="250"><br>
+  <img src="docs/images/markeraddpreviewatticqol.jpg" alt="Marker Add" width="250">
+  <img src="docs/images/markerlistpreviewatticqol.jpg" alt="Marker List" width="250">
+  <img src="docs/images/markerbasepreviewatticqol.jpg" alt="Marker Base" width="250">
 </p>
 
 ## Commands
